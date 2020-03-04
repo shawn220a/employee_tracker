@@ -1,0 +1,28 @@
+{
+  "name": "employee_tracker",
+  "version": "1.0.0",
+  "description": "A CLI tool for an employee management system",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shawn220a/employee_tracker.git"
+  },
+  "author": "Shawn Tschoepe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shawn220a/employee_tracker/issues"
+  },
+  "homepage": "https://github.com/shawn220a/employee_tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.0.5",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
