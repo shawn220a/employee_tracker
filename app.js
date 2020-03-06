@@ -17,10 +17,8 @@ connection.connect((err) => {
   start();
 });
 
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-  if (err) throw err
-
-  console.log('The solution is: ', rows[0].solution)
-});
+function start() {
+  console.log('hello');
+}
 
 connection.end();
