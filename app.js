@@ -1,11 +1,11 @@
-const inquirer = require('inquirer');
+const { prompt } = require('inquirer');
 const db = require('./db/DB');
 require('console.table');
 
 mainQuestions();
 
-function mainQuestions() {
-  inquirer.prompt({
+async function mainQuestions() {
+  const { choice } = await prompt({
     type: 'list',
     name: 'choice',
     message: 'How would you like to start?',
@@ -67,28 +67,26 @@ function mainQuestions() {
         value: 'quit'
       }
     ]
-  }).then((answers) => {
-    const { choice } = answers;
+  })
 
-    switch (choice) {
-      case 'view-employees':
-        return viewEmployees();
-      case 'view-roles':
-        return viewRoles();
-      case 'view-departments':
-        return viewDepartments();
-      case 'add-employee':
-        return addNewEmployee();
-      case 'update-employee-role':
-        return updateEmployeesRole();
-      case 'add-role':
-        return addRole();
-      case 'add-department':
-        return addDepartment();
-      default:
-        quit();
-    }
-  });
+  switch (choice) {
+    case 'view-employees':
+      return viewEmployees();
+    case 'view-roles':
+      return viewRoles();
+    case 'view-departments':
+      return viewDepartments();
+    case 'add-employee':
+      return addNewEmployee();
+    case 'update-employee-role':
+      return updateEmployeesRole();
+    case 'add-role':
+      return addRole();
+    case 'add-department':
+      return addDepartment();
+    default:
+      quit();
+  }
 }
 
 async function viewEmployees() {
@@ -122,7 +120,7 @@ async function addNewEmployee() {
   const roles = await db.findRoles();
   const employees = await db.findEmployees();
 
-  const employee = await inquire.prompt([
+  const employee = await prompt([
     {
       name: 'first_name',
       message: 'What is the employee\'s first name?'
@@ -138,7 +136,7 @@ async function addNewEmployee() {
     value: id
   }));
 
-  const { roleId } = await inquire.prompt({
+  const { roleId } = await prompt({
     type: 'list',
     name: 'roleId',
     message: 'What is the employee\'s role?',
@@ -153,7 +151,7 @@ async function addNewEmployee() {
   }));
   managerChoices.unshift({ name: 'None', value: null });
 
-  const { managerId } = await inquire.prompt({
+  const { managerId } = await prompt({
     type: 'list',
     name: 'managerId',
     message: 'Who is the employee\'s manager?',
@@ -179,7 +177,7 @@ async function updateEmployeesRole() {
     value: id
   }));
 
-  const { employeeId } = await inquire.prompt([
+  const { employeeId } = await prompt([
     {
       type: 'list',
       name: 'employeeId',
@@ -195,7 +193,7 @@ async function updateEmployeesRole() {
     value: id
   }));
 
-  const { roleId } = await inquire.prompt([
+  const { roleId } = await prompt([
     {
       type: 'list',
       name: 'roleId',
@@ -219,7 +217,7 @@ async function addRole() {
     value: id
   }));
 
-  const role = await inquire.prompt([
+  const role = await prompt([
     {
       name: 'title',
       message: 'What is the name of the role?'
@@ -244,7 +242,7 @@ async function addRole() {
 }
 
 async function addDepartment() {
-  const department = await inquire.prompt([
+  const department = await prompt([
     {
       name: 'name',
       message: 'What is the name of the department?'
